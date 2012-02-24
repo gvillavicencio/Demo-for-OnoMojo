@@ -1,0 +1,37 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<%=  javascript_include_tag "items" %>
+<h2>Items</h2>
+<p id="notice"><%= notice %></p>
+<% if @items.size > 0 %>
+  <div class="add_item"><%= link_to 'Add new Item', new_item_path %></div>
+  <br />
+  <table id="item_list">
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Color</b></td>
+      <td><b>User</b></td>
+    </tr>
+    <% @items.each do |item| %>
+      <tr id="item_<%= item.id %>">
+        <td><%= item.name %></td>
+        <td><%= item.color %></td>
+        <td><%= item.user.name %> </td>
+        <td><%= link_to image_tag('edit.png', :border => 0), edit_item_path(item) %></td>
+        <td><%= link_to image_tag('delete.gif'), item, confirm: 'Are you sure?', method: :delete, remote: true %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <% if @users_count > 0 %>
+    <p>No item have been defined yet</p>
+    <%= link_to 'Create one now',new_item_path %>
+  <% else %>
+    <p>In order to create an Item, you must have at least 1 user.</p>
+    <p><%= link_to "Create one now", new_user_path %></p>
+  <% end %>
+  <br />
+<% end %>
+

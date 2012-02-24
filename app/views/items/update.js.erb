@@ -1,0 +1,18 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+var div_notice = $('div#notice');
+div_notice.html("");
+<% if @Item.new_record? %>
+  <% if (@Item.errors[:name].blank?) %>
+    div_notice.append('<label style="color:red">* Can't be empty</label>');
+  <% end %>
+  <% if (@Item.errors[:color].blank?) %>
+    div_notice.append('<label style="color:red">* Can't be empty</label>');
+  <% end %>
+<% else %>
+  $('div#notice').append("Item updated");
+  $('div#edit_item_form').fadeOut();
+  $('form :input').val("");
+<% end %>

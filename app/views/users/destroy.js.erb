@@ -1,0 +1,7 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+
+$('#<%= dom_id(@user) %>').fadeOut();
+$("select#home_users option[value='<%= @user.id %>']").remove();

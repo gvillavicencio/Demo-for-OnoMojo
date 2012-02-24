@@ -1,0 +1,13 @@
+<h1>App</h1>
+<div id="links">
+     <div>
+         <%=  link_to "Manage Users", users_path %>
+  </div>
+  <div>
+    <%=  link_to "Manage Items", items_path %>
+  </div>
+  <div>
+    <%= select :home, :users, [["Select a User:", 0]] + @users.map {|u| [u.name,u.id]} %>
+  </div>
+</div>
+<div id="ajax_content" style="clear: both"></div>

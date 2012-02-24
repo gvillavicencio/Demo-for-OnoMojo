@@ -1,0 +1,18 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#links{
+    height: 40px;
+    clear: both;
+}
+
+#links div{
+    float:left;
+    padding: 8px;
+}
+
+#links div:first-child{
+    padding-left: 0px;
+}
+

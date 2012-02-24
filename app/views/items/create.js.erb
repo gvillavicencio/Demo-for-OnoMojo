@@ -1,0 +1,25 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<% if @Item.new_record? %>
+  <% if !@Item.errors[:name].blank? %>
+    $("input#item_name").css("border","1px solid red");
+   <% else %>
+    $("input#item_name").removeAttr("style");
+  <% end %>
+  <% if !@Item.errors[:color].blank? %>
+    $("input#item_color").css("border","1px solid red");
+   <% else %>
+    $("input#item_color").removeAttr("style");;
+  <% end %>
+  <% if !@Item.errors[:user_id].blank? %>
+    $("select#item_user_id").css("border","1px solid red");
+   <% else %>
+    $("select#item_user_id").removeAttr("style");
+  <% end %>
+<% else %>
+  $('div#notice').append("Item created");
+  $('div#new_item_form').fadeOut();
+  $('form :input').val("");
+<% end %>

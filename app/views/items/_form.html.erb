@@ -1,0 +1,26 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<%= form_for(@Item, remote: true) do |f| %>
+  <table class="info">
+    <tr>
+      <td><%= f.label :name %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :color %></td>
+      <td><%= f.text_field :color %></td>
+    </tr>
+    <tr>
+      <td>User</td>
+      <td><%= f.select :user_id, [["Select one", 0]] + @users.map {|u| [u.name,u.id]} %></td>
+      <% if (!@Item.errors[:user_id].blank?) %>
+        <td><label style="color:red">You have to select a user</label></td>
+      <% end %>
+    </tr>
+  </table>
+  <div class="action">
+    <%=f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<% if @user.items.size > 0 %>
+  <div>Items:</div>
+  <table border="1">
+    <tr>
+      <td>Name:</td>
+      <td>Color:</td>
+    </tr>
+    <% @user.items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.color %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <div>This User have no items</div>
+<% end %>
