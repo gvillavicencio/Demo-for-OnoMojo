@@ -1,12 +1,7 @@
-<%#
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-%>
-<%=  javascript_include_tag "items" %>
 <h2>Items</h2>
 <p id="notice"><%= notice %></p>
 <% if @items.size > 0 %>
-  <div class="add_item"><%= link_to 'Add new Item', new_item_path %></div>
+  <%= link_to 'Add new Item', new_item_path, :id => "add_new_item"  %>
   <br />
   <table id="item_list">
     <tr>
@@ -19,18 +14,18 @@
         <td><%= item.name %></td>
         <td><%= item.color %></td>
         <td><%= item.user.name %> </td>
-        <td><%= link_to image_tag('edit.png', :border => 0), edit_item_path(item) %></td>
-        <td><%= link_to image_tag('delete.gif'), item, confirm: 'Are you sure?', method: :delete, remote: true %></td>
+        <td><%= link_to image_tag('edit.png', :border => 0), edit_item_path(item), :class=>'edit_item' %></td>
+        <td><%= link_to image_tag('delete.gif'), item, confirm: 'Are you sure?', method: :delete, remote: true, :class => 'delete_item' %></td>
       </tr>
     <% end %>
   </table>
 <% else %>
   <% if @users_count > 0 %>
     <p>No item have been defined yet</p>
-    <%= link_to 'Create one now',new_item_path %>
+    <%= link_to 'Create one now',new_item_path, :id => "add_new_item"  %>
   <% else %>
     <p>In order to create an Item, you must have at least 1 user.</p>
-    <p><%= link_to "Create one now", new_user_path %></p>
+    <p><%= link_to "Create one now", new_user_path, :id => "add_new_item"  %></p>
   <% end %>
   <br />
 <% end %>

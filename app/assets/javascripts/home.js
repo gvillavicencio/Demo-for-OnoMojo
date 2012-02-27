@@ -4,18 +4,16 @@
  */
 $(document).ready(function() {
     $('#home_users').change(function () {
-        select_val = $(this).val();
-        if(select_val > 0){
-            load_ajax("/users/"+select_val);
+        if($(this).val() > 0){
+            load_ajax("/users/"+$(this).val());
         }
     });
 
     $("a").live("click",function(e){
         e.preventDefault();
-        var a_clicked = $(this);
-        if(a_clicked.attr("href") == "/users" || a_clicked.attr("href") == "/items"){
+        if($(this).attr("href") == "/users" || $(this).attr("href") == "/items"){
             $("#home_users").val("0");
-            load_ajax(a_clicked.attr("href"));
+            load_ajax($(this).attr("href"));
         }
     });
 

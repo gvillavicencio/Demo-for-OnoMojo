@@ -4,36 +4,44 @@ class ItemsController < ApplicationController
   def index
     @items = Item.find(:all, :include => :user)
     @users_count = User.count
-    render :action => :index, :layout => false if (request.xhr?)
+    render :layout => false if (request.xhr?)
   end
 
   # GET /items/new
   def new
     @Item = Item.new
     @users = User.all
-    render :action => :new, :layout => false if (request.xhr?)
+    render :layout => false if (request.xhr?)
   end
 
   # GET /items/:id/edit
   def edit
     @Item = Item.find(params[:id])
     @users = User.all
-    render :action => :edit, :layout => false if (request.xhr?)
+    render :layout => false if (request.xhr?)
   end
   
   # POST /items
   def create
     @Item = Item.new(params[:item])
 
-    respond_to do |format|
-      if @Item.save
-        format.html{redirect_to items_path, notice: 'Item created successfully'}
+
+    if @Item.save
+      if request.xhr?
+        render :json => {"error" => "false", "item" => @Item, }
+      else
+        redirect_to items_path, notice: 'Item created successfully'
+      end
+    else
+      if request.xhr?
+        render :json => {"error" => "true", "errors" => @Item.errors}
       else
         @users = User.all
-        format.html{render action: 'new'}
+        render action: 'new'
       end
-      format.js
     end
+     
+   
   end
 
   # PUT /items/:id
@@ -41,14 +49,20 @@ class ItemsController < ApplicationController
     @Item = Item.find(params[:id])
     @Item.attributes = params[:item]
     
-    respond_to do |format|
-      if @Item.save
-        format.html{ redirect_to items_path, notice: 'Item updated'}
+
+    if @Item.save
+      if request.xhr?
+        render :json => {"error" => "false", "item" => @Item, }
+      else
+        redirect_to items_path, notice: 'Item updated'
+      end
+    else
+      if request.xhr?
+        render :json => {"error" => "true", "errors" => @Item.errors}
       else
         @users = User.all
-        format.html{ render action: 'edit'} 
+        render action: 'edit'
       end
-      format.js
     end
   end
 
@@ -57,9 +71,10 @@ class ItemsController < ApplicationController
     @Item = Item.find(params[:id])
     @Item.destroy
 
-    respond_to do |format|
-      format.html {redirect_to items_path, notice: 'Item deleted'}
-      format.js
+    if request.xhr?
+      render :json => {"delete" => "true", "item_deleted" => @Item}
+    else
+      redirect_to items_path, notice: 'Item deleted'
     end
   end
 

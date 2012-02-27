@@ -51,7 +51,8 @@ class UsersController < ApplicationController
 
     if @user.save
       if request.xhr?
-        render :json => {"error" => "false", "user" => @user}
+        #render :json => {"error" => "false", "user" => @user, 'select_for_users' => (render :partial=>'blabla', :locals=>{'users'=>@users})}
+        render :json => {"error" => "false", "user" => @user, }
       else
         redirect_to users_path, notice: 'User created successfully'
       end
@@ -69,9 +70,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
 
-    respond_to do |format|
-      format.html { redirect_to users_path, notice: 'User deleted'}
-      format.js
+    if request.xhr?
+      render :json => {"delete" => "true", "user_deleted" => @user}
+    else
+      redirect_to users_path, notice: 'User deleted'
     end
   end
 

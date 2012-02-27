@@ -2,7 +2,7 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 %>
-<%= form_for(@Item, remote: true) do |f| %>
+<%= form_for(@Item, remote: true,:html => { :'data-type' => 'json' }) do |f| %>
   <table class="info">
     <tr>
       <td><%= f.label :name %></td>

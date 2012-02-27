@@ -6,7 +6,7 @@
   <div>
     <%=  link_to "Manage Items", items_path %>
   </div>
-  <div>
+  <div id="drop_down">
     <%= select :home, :users, [["Select a User:", 0]] + @users.map {|u| [u.name,u.id]} %>
   </div>
 </div>

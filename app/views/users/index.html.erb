@@ -1,12 +1,7 @@
-<%#
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-%>
-<%=  javascript_include_tag "users" %>
 <h2>Users</h2>
 <p id="notice"><%= notice %></p>
 <% if @users.size > 0 %>
-  <%= link_to 'Add new User', new_user_path %>
+  <%= link_to 'Add new User', new_user_path, :id => "add_new_user" %>
   <br />
   <table id="user_list">
     <tr>
@@ -17,13 +12,13 @@
       <tr id="user_<%= user.id %>">
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
-        <td><%= link_to image_tag('edit.png', :border => 0), edit_user_path(user) %></td>
-        <td><%= link_to image_tag('delete.gif'), user, confirm: 'Are you sure?', method: :delete, remote: true %></td>
+        <td><%= link_to image_tag('edit.png', :border => 0), edit_user_path(user), :class=>'edit_user' %></td>
+        <td><%= link_to image_tag('delete.gif'), user, confirm: 'Are you sure?', method: :delete, remote: true, :class => 'delete_user' %></td>
       </tr>
     <% end %>
   </table>
 <% else %>
   <p>No user have been defined yet</p>
-  <%= link_to 'Create one now',new_user_path %>
+  <%= link_to 'Create one now',new_user_path, :id => "add_new_user" %>
 <% end %>
 
